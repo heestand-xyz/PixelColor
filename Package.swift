@@ -4,6 +4,11 @@ import PackageDescription
 
 let package = Package(
     name: "PixelColor",
+    platforms: [
+        .iOS(.v13),
+        .tvOS(.v13),
+        .macOS(.v10_15),
+    ],
     products: [
         .library(name: "PixelColor", targets: ["PixelColor"]),
     ],

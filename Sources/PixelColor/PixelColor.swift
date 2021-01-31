@@ -245,17 +245,22 @@ public struct PixelColor {
     
     public init(hex: String, a: CGFloat = 1) {
         var hex = hex
-        if hex[0..<1] == "#" {
+        func sub(txt: String, range: CountableRange<Int>) -> String {
+            let start: String.Index = txt.index(txt.startIndex, offsetBy: range.lowerBound)
+            let end: String.Index = txt.index(txt.startIndex, offsetBy: range.upperBound)
+            return String(txt[start..<end])
+        }
+        if sub(txt: hex, range: 0..<1) == "#" {
             if hex.count == 4 {
-                hex = hex[1..<4]
+                hex = sub(txt: hex, range: 1..<4)
             } else {
-                hex = hex[1..<7]
+                hex = sub(txt: hex, range: 1..<7)
             }
         }
         if hex.count == 3 {
-            let r = hex[0..<1]
-            let g = hex[1..<2]
-            let b = hex[2..<3]
+            let r = sub(txt: hex, range: 0..<1)
+            let g = sub(txt: hex, range: 1..<2)
+            let b = sub(txt: hex, range: 2..<3)
             hex = r + r + g + g + b + b
         }
         var hexInt: UInt64 = 0
@@ -266,11 +271,12 @@ public struct PixelColor {
         blue = CGFloat((hexInt & 0xff) >> 0) / 255.0
         alpha = a
     }
+
     
     // MARK: - Channel
     /// Used by ChannelMixPIX
     
-    public enum Channel: Int, Floatable {
+    public enum Channel: Int {
         case red
         case green
         case blue
@@ -283,7 +289,6 @@ public struct PixelColor {
             case .alpha: return .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
             }
         }
-        public var floats: [CGFloat] { [CGFloat(rawValue)] }
     }
     
     public var isPureChannel: Bool {
