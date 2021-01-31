@@ -240,7 +240,7 @@ public struct PixelColor {
     
     public var hex: String {
         let hexInt: Int = (Int)(CGFloat(red)*255)<<16 | (Int)(CGFloat(green)*255)<<8 | (Int)(CGFloat(blue)*255)<<0
-        return String(format:"#%06x", hexInt)
+        return String(format:"%06x", hexInt).uppercased()
     }
     
     public init(hex: String, a: CGFloat = 1) {
