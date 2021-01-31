@@ -244,6 +244,13 @@ public struct PixelColor {
     }
     
     public init(hex: String, a: CGFloat = 1) {
+        guard hex != "" else {
+            red = 0.0
+            green = 0.0
+            blue = 0.0
+            alpha = a
+            return
+        }
         var hex = hex
         func sub(txt: String, range: CountableRange<Int>) -> String {
             let start: String.Index = txt.index(txt.startIndex, offsetBy: range.lowerBound)
