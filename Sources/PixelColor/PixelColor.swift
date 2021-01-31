@@ -67,10 +67,6 @@ public struct PixelColor {
         CGColor(colorSpace: CGColorSpace(name: CGColorSpace.displayP3)!, components: components) ?? CGColor(gray: 0.0, alpha: 0.0)
     }
     
-    public var brightness: CGFloat {
-        (red + green + blue) / 3.0
-    }
-    
     public var monochrome: PixelColor {
         PixelColor(red: brightness, green: brightness, blue: brightness, alpha: alpha)
     }
@@ -133,6 +129,9 @@ public struct PixelColor {
     }
     public var saturation: CGFloat {
         hsv().s
+    }
+    public var brightness: CGFloat {
+        hsv().v
     }
     func hsv() -> (h: CGFloat, s: CGFloat, v: CGFloat) {
         let r: CGFloat = red
