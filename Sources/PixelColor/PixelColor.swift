@@ -27,6 +27,13 @@ public struct PixelColor {
     public static var white: PixelColor       { return PixelColor(white: 1.0) }
     public static var black: PixelColor       { return PixelColor(white: 0.0) }
     
+    public static var rawRed: PixelColor         { return PixelColor(red: 1.0, green: 0.0, blue: 0.0) }
+    public static var rawYellow: PixelColor      { return PixelColor(red: 1.0, green: 1.0, blue: 0.0) }
+    public static var rawGreen: PixelColor       { return PixelColor(red: 0.0, green: 1.0, blue: 0.0) }
+    public static var rawCyan: PixelColor        { return PixelColor(red: 0.0, green: 1.0, blue: 1.0) }
+    public static var rawBlue: PixelColor        { return PixelColor(red: 0.0, green: 0.0, blue: 1.0) }
+    public static var rawMagenta: PixelColor     { return PixelColor(red: 1.0, green: 0.0, blue: 1.0) }
+    
     public static var blue: PixelColor {
         #if os(macOS)
         return PixelColor(NSColor.systemBlue)
