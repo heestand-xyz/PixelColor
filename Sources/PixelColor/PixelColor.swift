@@ -25,18 +25,85 @@ public struct PixelColor {
     public static var clearWhite: PixelColor  { return PixelColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0) }
 
     public static var white: PixelColor       { return PixelColor(white: 1.0) }
-    public static var lightGray: PixelColor   { return PixelColor(white: 0.75) }
-    public static var gray: PixelColor        { return PixelColor(white: 0.5) }
-    public static var darkGray: PixelColor    { return PixelColor(white: 0.25) }
     public static var black: PixelColor       { return PixelColor(white: 0.0) }
     
-    public static var red: PixelColor         { return PixelColor(red: 1.0, green: 0.0, blue: 0.0) }
-    public static var orange: PixelColor      { return PixelColor(red: 1.0, green: 0.5, blue: 0.0) }
-    public static var yellow: PixelColor      { return PixelColor(red: 1.0, green: 1.0, blue: 0.0) }
-    public static var green: PixelColor       { return PixelColor(red: 0.0, green: 1.0, blue: 0.0) }
-    public static var cyan: PixelColor        { return PixelColor(red: 0.0, green: 1.0, blue: 1.0) }
-    public static var blue: PixelColor        { return PixelColor(red: 0.0, green: 0.0, blue: 1.0) }
-    public static var magenta: PixelColor     { return PixelColor(red: 1.0, green: 0.0, blue: 1.0) }
+    public static var blue: PixelColor {
+        #if os(macOS)
+        return PixelColor(NSColor.systemBlue)
+        #else
+        return PixelColor(UIColor.systemBlue)
+        #endif
+    }
+    public static var brown: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemBrown)
+        #else
+        return PixelColor(UIColor.systemBrown)
+        #endif
+    }
+    public static var gray: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemGray)
+        #else
+        return PixelColor(UIColor.systemGray)
+        #endif
+    }
+    public static var green: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemGreen)
+        #else
+        return PixelColor(UIColor.systemGreen)
+        #endif
+    }
+    public static var indigo: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemIndigo)
+        #else
+        return PixelColor(UIColor.systemIndigo)
+        #endif
+    }
+    public static var orange: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemOrange)
+        #else
+        return PixelColor(UIColor.systemOrange)
+        #endif
+    }
+    public static var pink: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemPink)
+        #else
+        return PixelColor(UIColor.systemPink)
+        #endif
+    }
+    public static var purple: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemPurple)
+        #else
+        return PixelColor(UIColor.systemPurple)
+        #endif
+    }
+    public static var red: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemRed)
+        #else
+        return PixelColor(UIColor.systemRed)
+        #endif
+    }
+    public static var teal: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemTeal)
+        #else
+        return PixelColor(UIColor.systemTeal)
+        #endif
+    }
+    public static var yellow: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemYellow)
+        #else
+        return PixelColor(UIColor.systemYellow)
+        #endif
+    }
     
     #if os(macOS)
     public var nsColor: NSColor {
