@@ -175,6 +175,36 @@ public struct PixelColor {
     }
     #endif
     
+    @available(macOS 11, *)
+    public init(_ color: Color) {
+        guard let cgColor: CGColor = color.cgColor else {
+            self.init(white: 0.0, alpha: 0.0)
+            return
+        }
+        self.init(cgColor)
+    }
+    
+    public init(_ cgColor: CGColor) {
+        guard let components: [CGFloat] = cgColor.components else {
+            red = 0.0
+            green = 0.0
+            blue = 0.0
+            alpha = 0.0
+            return
+        }
+        red = components[0]
+        green = components[1]
+        blue = components[2]
+        alpha = components[3]
+    }
+    
+    public init(_ ciColor: CIColor) {
+        red = ciColor.red
+        green = ciColor.green
+        blue = ciColor.blue
+        alpha = ciColor.alpha
+    }
+    
     @available(*, deprecated, renamed: "init(red:green:blue:alpha:)")
     public init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1.0) {
         self.init(red: r, green: g, blue: b, alpha: a)
