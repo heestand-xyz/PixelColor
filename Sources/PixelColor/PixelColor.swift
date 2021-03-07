@@ -49,6 +49,7 @@ public struct PixelColor {
         return PixelColor(UIColor.systemGreen)
         #endif
     }
+    @available(macOS 10.15, *)
     public static var indigo: PixelColor{
         #if os(macOS)
         return PixelColor(NSColor.systemIndigo)
@@ -109,6 +110,7 @@ public struct PixelColor {
     }
     #endif
     
+    @available(macOS 10.15, *)
     public var color: Color {
         #if os(macOS)
         return Color(nsColor)
