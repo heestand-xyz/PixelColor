@@ -177,6 +177,7 @@ public struct PixelColor {
     }
     #endif
     
+    @available(iOS 14.0, *)
     @available(macOS 11, *)
     public init(_ color: Color) {
         guard let cgColor: CGColor = color.cgColor else {
