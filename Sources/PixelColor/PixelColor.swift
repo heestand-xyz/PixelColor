@@ -123,11 +123,31 @@ public struct PixelColor {
         return [red, green, blue, alpha]
     }
     
+    public var greyComponents: [CGFloat] {
+        return [red, alpha]
+    }
+    
+    var colorSpace: CGColorSpace {
+        if saturation > 0.0 {
+            return CGColorSpace(name: CGColorSpace.displayP3)!
+        } else {
+            return CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!
+        }
+    }
+    
     public var ciColor: CIColor {
-        CIColor(red: red, green: green, blue: blue, alpha: alpha, colorSpace: CGColorSpace(name: CGColorSpace.displayP3)!) ?? .clear
+        if saturation > 0.0 {
+            return CIColor(red: red, green: green, blue: blue, alpha: alpha, colorSpace: colorSpace) ?? .clear
+        } else {
+            return CIColor(cgColor: cgColor)
+        }
     }
     public var cgColor: CGColor {
-        CGColor(colorSpace: CGColorSpace(name: CGColorSpace.displayP3)!, components: components) ?? CGColor(gray: 0.0, alpha: 0.0)
+        if saturation > 0.0 {
+            return CGColor(colorSpace: colorSpace, components: components) ?? CGColor(gray: 0.0, alpha: 0.0)
+        } else {
+            return CGColor(colorSpace: CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!, components: greyComponents) ?? CGColor(gray: 0.0, alpha: 0.0)
+        }
     }
     
     public var monochrome: PixelColor {
@@ -195,10 +215,10 @@ public struct PixelColor {
             alpha = 0.0
             return
         }
-        red = components[0]
-        green = components[1]
-        blue = components[2]
-        alpha = components[3]
+        red = components.first!
+        green = components.count == 4 ? components[1] : components.first!
+        blue = components.count == 4 ? components[2] : components.first!
+        alpha = components.last!
     }
     
     public init(_ ciColor: CIColor) {
