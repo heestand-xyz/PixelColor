@@ -5,7 +5,7 @@ import UIKit
 #endif
 import SwiftUI
 
-public struct PixelColor {
+public struct PixelColor: Equatable {
     
     public var red: CGFloat
     public var green: CGFloat
