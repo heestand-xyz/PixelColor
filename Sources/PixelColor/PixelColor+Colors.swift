@@ -5,7 +5,12 @@
 //  Created by Anton Heestand on 2021-05-11.
 //
 
-import Foundation
+#if os(macOS)
+import AppKit
+#else
+import UIKit
+#endif
+import SwiftUI
 
 extension PixelColor {
     
