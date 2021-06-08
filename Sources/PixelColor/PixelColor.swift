@@ -5,6 +5,9 @@ import UIKit
 #endif
 import SwiftUI
 
+/// Pixel Color is a color with 4 `CGFloat` components of ``red``,  ``green``,  ``blue`` and  ``alpha``.
+///
+/// Do color conversions with ``hue`` and ``saturation``.
 public struct PixelColor: Equatable, Hashable {
     
     public var red: CGFloat
