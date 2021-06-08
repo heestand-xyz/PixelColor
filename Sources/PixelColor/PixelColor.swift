@@ -5,9 +5,11 @@ import UIKit
 #endif
 import SwiftUI
 
-/// Pixel Color is a color with 4 `CGFloat` components of ``red``,  ``green``,  ``blue`` and  ``alpha``.
+/// Pixel Color contains 4 `CGFloat` channels.
 ///
-/// Do color conversions with ``hue`` and ``saturation``.
+/// - Channels: ``red-swift.type.property``,  ``green-swift.property``,  ``blue-swift.property`` and  ``alpha``.
+/// - Color conversions: ``init(hue:saturation:brightness:alpha:)``, ``hue`` and ``saturation``.
+/// - Hex conversion: ``init(hex:a:)`` and ``hex``.
 public struct PixelColor: Equatable, Hashable {
     
     public var red: CGFloat
@@ -140,6 +142,7 @@ public struct PixelColor: Equatable, Hashable {
         return String(format:"%06x", hexInt).uppercased()
     }
     
+    /// Create a Pixel Color from a hex like orange: `#ff80000`
     public init(hex: String, a: CGFloat = 1) {
         guard hex != "" else {
             red = 0.0
