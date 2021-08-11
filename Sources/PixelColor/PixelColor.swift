@@ -127,7 +127,7 @@ public struct PixelColor: Equatable, Hashable {
     
     // MARK: - Hue Saturaton Brightness
        
-    public init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat = 1.0) {
+    public init(hue: CGFloat, saturation: CGFloat = 1.0, brightness: CGFloat = 1.0, alpha: CGFloat = 1.0) {
         let color = PixelColor.rgb(h: hue, s: saturation, v: brightness)
         red = color.r
         green = color.g
