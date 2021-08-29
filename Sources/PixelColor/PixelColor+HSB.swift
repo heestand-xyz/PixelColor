@@ -14,15 +14,33 @@ extension PixelColor {
     typealias RGB = (r: CGFloat, g: CGFloat, b: CGFloat)
     
     public var hue: CGFloat {
-        hsv().h
+        get { hsv().h }
+        set {
+            self = PixelColor(hue: newValue,
+                              saturation: saturation,
+                              brightness: brightness,
+                              alpha: alpha)
+        }
     }
     
     public var saturation: CGFloat {
-        hsv().s
+        get { hsv().s }
+        set {
+            self = PixelColor(hue: hue,
+                              saturation: newValue,
+                              brightness: brightness,
+                              alpha: alpha)
+        }
     }
    
     public var brightness: CGFloat {
-        hsv().v
+        get { hsv().v }
+        set {
+            self = PixelColor(hue: hue,
+                              saturation: saturation,
+                              brightness: newValue,
+                              alpha: alpha)
+        }
     }
     
     func hsv() -> (h: CGFloat, s: CGFloat, v: CGFloat) {
