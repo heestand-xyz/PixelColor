@@ -23,6 +23,11 @@ extension PixelColor {
         #endif
     }
     
+    @available(macOS 10.15, *)
+    public var displayP3: Color {
+        Color(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+    }
+    
     #if os(macOS)
     
     public var nsColor: NSColor {
