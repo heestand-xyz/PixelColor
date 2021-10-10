@@ -27,6 +27,15 @@ extension PixelColor {
     public static var rawCyan: PixelColor = .init(red: 0.0, green: 1.0, blue: 1.0)
     public static var rawBlue: PixelColor = .init(red: 0.0, green: 0.0, blue: 1.0)
     public static var rawMagenta: PixelColor = .init(red: 1.0, green: 0.0, blue: 1.0)
+    
+    public static func brightness(_ brightness: CGFloat, alpha: CGFloat = 1.0) -> PixelColor {
+        PixelColor(hue: 0.0, saturation: 0.0, brightness: brightness, alpha: alpha)
+    }
+    
+    public static func hue(_ hue: CGFloat, alpha: CGFloat = 1.0) -> PixelColor {
+        PixelColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: alpha)
+    }
+    
 }
 
 extension PixelColor {
