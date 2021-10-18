@@ -21,6 +21,8 @@ extension PixelColor {
     public static var appearance: Appearance {
         #if os(macOS)
         return NSApp.effectiveAppearance.name == .darkAqua ? .dark : .light
+        #elseif os(tvOS)
+        return .dark
         #else
         return UIView().traitCollection.userInterfaceStyle == .dark ? .dark : .light
         #endif

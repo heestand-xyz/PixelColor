@@ -90,6 +90,7 @@ public struct PixelColor: Equatable, Hashable {
     #endif
     
     @available(iOS 14.0, *)
+    @available(tvOS 14, *)
     @available(macOS 11, *)
     public init(_ color: Color) {
         guard let cgColor: CGColor = color.cgColor else {
