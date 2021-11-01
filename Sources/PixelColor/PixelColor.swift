@@ -36,7 +36,7 @@ public struct PixelColor: Equatable, Hashable {
     
     var colorSpace: CGColorSpace {
         if saturation > 0.0 {
-            return CGColorSpace(name: CGColorSpace.displayP3)!
+            return CGColorSpace(name: CGColorSpace.sRGB)!
         } else {
             return CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!
         }
@@ -102,16 +102,20 @@ public struct PixelColor: Equatable, Hashable {
     
     public init(_ cgColor: CGColor) {
         guard let components: [CGFloat] = cgColor.components else {
-            red = 0.0
-            green = 0.0
-            blue = 0.0
-            alpha = 0.0
+            self = .clear
             return
         }
-        red = components.first!
-        green = components.count == 4 ? components[1] : components.first!
-        blue = components.count == 4 ? components[2] : components.first!
-        alpha = components.last!
+        let color: PixelColor = PixelColor(red: components.first!,
+                                           green: components.count == 4 ? components[1] : components.first!,
+                                           blue: components.count == 4 ? components[2] : components.first!,
+                                           alpha: components.last!)
+        print("---->", cgColor.colorSpace)
+//        if cgColor.colorSpace == CGColorSpace(name: CGColorSpace.sRGB)! {
+//            self = color.sRGBToLinear()
+//        } else {
+        #warning("Convert other color spaces")
+        self = color
+//        }
     }
     
     public init(_ ciColor: CIColor) {
@@ -145,6 +149,19 @@ public struct PixelColor: Equatable, Hashable {
     
     /// Create a Pixel Color from a hex like orange: `#ff80000`
     public init(hex: String, a: CGFloat = 1) {
+        if hex.lowercased() == "f" {
+            red = 1.0
+            green = 1.0
+            blue = 1.0
+            alpha = 1.0
+            return
+        } else if hex.lowercased() == "0" {
+            red = 0.0
+            green = 0.0
+            blue = 0.0
+            alpha = 1.0
+            return
+        }
         guard hex != "" else {
             red = 0.0
             green = 0.0
