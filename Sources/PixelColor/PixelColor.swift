@@ -105,17 +105,10 @@ public struct PixelColor: Equatable, Hashable {
             self = .clear
             return
         }
-        let color: PixelColor = PixelColor(red: components.first!,
-                                           green: components.count == 4 ? components[1] : components.first!,
-                                           blue: components.count == 4 ? components[2] : components.first!,
-                                           alpha: components.last!)
-        print("---->", cgColor.colorSpace)
-//        if cgColor.colorSpace == CGColorSpace(name: CGColorSpace.sRGB)! {
-//            self = color.sRGBToLinear()
-//        } else {
-        #warning("Convert other color spaces")
-        self = color
-//        }
+        self = PixelColor(red: components.first!,
+                          green: components.count == 4 ? components[1] : components.first!,
+                          blue: components.count == 4 ? components[2] : components.first!,
+                          alpha: components.last!)
     }
     
     public init(_ ciColor: CIColor) {
