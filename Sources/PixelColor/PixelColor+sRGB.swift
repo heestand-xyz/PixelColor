@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 /// https://gist.github.com/adamgraham/263fac81705221a96e4719cb1ad36009
 
