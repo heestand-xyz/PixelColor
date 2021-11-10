@@ -32,5 +32,4 @@ extension PixelColor: Codable {
         try container.encode(blue, forKey: .blue)
         try container.encode(alpha, forKey: .alpha)
     }
-    
 }

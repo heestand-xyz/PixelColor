@@ -35,7 +35,6 @@ extension PixelColor {
     public static func hue(_ hue: CGFloat, alpha: CGFloat = 1.0) -> PixelColor {
         PixelColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: alpha)
     }
-    
 }
 
 extension PixelColor {
