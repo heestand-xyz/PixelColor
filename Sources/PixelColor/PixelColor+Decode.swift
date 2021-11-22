@@ -12,19 +12,23 @@ extension PixelColor {
     
     static func decode(color: Color) -> PixelColor? {
 
-        print("-------->", color.description)
-        
         switch color.description {
+        case "primary":
+            return .primary
+        case "clear":
+            return .clear
         case "black":
             return .black
         case "white":
             return .white
         case "gray":
             return .gray
-        case "blue":
-            return .blue
+        case "red":
+            return .red
         case "green":
             return .green
+        case "blue":
+            return .blue
         case "indigo":
             return .indigo
         case "orange":
@@ -33,12 +37,18 @@ extension PixelColor {
             return .pink
         case "purple":
             return .purple
-        case "red":
-            return .red
         case "teal":
             return .teal
         case "yellow":
             return .yellow
+        case "brown":
+            return .brown
+        case "mint":
+            if #available(iOS 15.0, tvOS 15.0, macOS 12.0, *) {
+                return .mint
+            } else {
+                return nil
+            }
         default:
             
             if color.description.starts(with: "NamedColor") {

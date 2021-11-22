@@ -14,6 +14,8 @@ import SwiftUI
 
 extension PixelColor {
     
+    public static var primary: PixelColor = PixelColor.appearance == .dark ? .white : .black
+    
     public static var clear: PixelColor = .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
     public static var clearWhite: PixelColor = .init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
 
@@ -39,11 +41,11 @@ extension PixelColor {
 
 extension PixelColor {
     
-    public static var blue: PixelColor {
+    public static var red: PixelColor{
         #if os(macOS)
-        return PixelColor(NSColor.systemBlue)
+        return PixelColor(NSColor.systemRed)
         #else
-        return PixelColor(UIColor.systemBlue)
+        return PixelColor(UIColor.systemRed)
         #endif
     }
     
@@ -52,6 +54,14 @@ extension PixelColor {
         return PixelColor(NSColor.systemGreen)
         #else
         return PixelColor(UIColor.systemGreen)
+        #endif
+    }
+    
+    public static var blue: PixelColor {
+        #if os(macOS)
+        return PixelColor(NSColor.systemBlue)
+        #else
+        return PixelColor(UIColor.systemBlue)
         #endif
     }
     
@@ -88,14 +98,6 @@ extension PixelColor {
         #endif
     }
     
-    public static var red: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemRed)
-        #else
-        return PixelColor(UIColor.systemRed)
-        #endif
-    }
-    
     public static var teal: PixelColor{
         #if os(macOS)
         return PixelColor(NSColor.systemTeal)
@@ -109,6 +111,23 @@ extension PixelColor {
         return PixelColor(NSColor.systemYellow)
         #else
         return PixelColor(UIColor.systemYellow)
+        #endif
+    }
+    
+    public static var brown: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemBrown)
+        #else
+        return PixelColor(UIColor.systemBrown)
+        #endif
+    }
+    
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    public static var mint: PixelColor{
+        #if os(macOS)
+        return PixelColor(NSColor.systemMint)
+        #else
+        return PixelColor(UIColor.systemMint)
         #endif
     }
 }
