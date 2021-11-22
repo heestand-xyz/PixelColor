@@ -15,6 +15,12 @@ extension PixelColor {
         print("-------->", color.description)
         
         switch color.description {
+        case "black":
+            return .black
+        case "white":
+            return .white
+        case "gray":
+            return .gray
         case "blue":
             return .blue
         case "green":
