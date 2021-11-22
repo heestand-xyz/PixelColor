@@ -94,7 +94,11 @@ public struct PixelColor: Equatable, Hashable {
     @available(macOS 11, *)
     public init(_ color: Color) {
         guard let cgColor: CGColor = color.cgColor else {
-            self.init(white: 0.0, alpha: 0.0)
+            guard let pixelColor = Self.decode(color: color) else {
+                self = .clear
+                return
+            }
+            self = pixelColor
             return
         }
         self.init(cgColor)
