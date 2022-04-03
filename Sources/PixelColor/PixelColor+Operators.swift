@@ -74,7 +74,7 @@ public extension PixelColor {
     }
 }
 
-extension PixelColor {
+public extension PixelColor {
     
     static func + (lhs: CGFloat, rhs: PixelColor) -> PixelColor {
         
@@ -109,9 +109,9 @@ extension PixelColor {
     }
 }
 
-// MARK: -
+// MARK: - Modify
 
-extension PixelColor {
+public extension PixelColor {
     
     static func += (lhs: inout PixelColor, rhs: PixelColor) {
         
@@ -146,7 +146,7 @@ extension PixelColor {
     }
 }
 
-extension PixelColor {
+public extension PixelColor {
     
     static func += (lhs: inout PixelColor, rhs: CGFloat) {
         
