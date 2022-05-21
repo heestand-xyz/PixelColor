@@ -4,13 +4,14 @@ import AppKit
 import UIKit
 #endif
 import SwiftUI
+import CoreGraphics
 
 /// Pixel Color contains 4 `CGFloat` channels.
 ///
 /// - Channels: ``red-swift.type.property``,  ``green-swift.property``,  ``blue-swift.property`` and  ``alpha``.
 /// - Color conversions: ``init(hue:saturation:brightness:alpha:)``, ``hue`` and ``saturation``.
 /// - Hex conversion: ``init(hex:a:)`` and ``hex``.
-public struct PixelColor: Equatable, Hashable {
+public struct PixelColor: Equatable, Hashable, CustomStringConvertible {
     
     public var red: CGFloat
     public var green: CGFloat
@@ -25,6 +26,13 @@ public struct PixelColor: Equatable, Hashable {
     public var b: CGFloat { blue }
     @available(*, deprecated, renamed: "alpha")
     public var a: CGFloat { alpha }
+    
+    public var description: String {
+        func format(_ value: CGFloat) -> String {
+            "\(round(value * 1_000) / 1_000)"
+        }
+        return "PixelColor(red: \(format(red)), green: \(format(green)), blue: \(format(blue)), alpha: \(format(alpha))"
+    }
 
     public var components: [CGFloat] {
         return [red, green, blue, alpha]
