@@ -113,10 +113,22 @@ public struct PixelColor: Equatable, Hashable, CustomStringConvertible {
     }
     
     public init(_ cgColor: CGColor) {
+        
+        var cgColor: CGColor = cgColor
+        
+        let displayP3 = CGColorSpace(name: CGColorSpace.displayP3)!
+        let sRGB = CGColorSpace(name: CGColorSpace.sRGB)!
+        if cgColor.colorSpace == displayP3 {
+            if let convertedCGColor: CGColor = cgColor.converted(to: sRGB, intent: .defaultIntent, options: nil) {
+                cgColor = convertedCGColor
+            }
+        }
+        
         guard let components: [CGFloat] = cgColor.components else {
             self = .clear
             return
         }
+        
         self = PixelColor(red: components.first!,
                           green: components.count == 4 ? components[1] : components.first!,
                           blue: components.count == 4 ? components[2] : components.first!,
