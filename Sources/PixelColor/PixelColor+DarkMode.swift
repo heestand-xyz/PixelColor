@@ -1,7 +1,4 @@
 //
-//  File.swift
-//  
-//
 //  Created by Anton Heestand on 2021-06-21.
 //
 
@@ -13,18 +10,30 @@ import AppKit
 
 extension PixelColor {
     
-    public enum Appearance {
+    public enum Appearance: Hashable {
         case light
         case dark
     }
     
     public static var appearance: Appearance {
         #if os(macOS)
-        return NSApp.effectiveAppearance.name == .darkAqua ? .dark : .light
-        #elseif os(tvOS)
-        return .dark
+        func darkMode() -> Bool {
+            NSApp.effectiveAppearance.name == .darkAqua
+        }
+        if Thread.isMainThread {
+            return darkMode() ? .dark : .light
+        } else {
+            var appearance: Appearance!
+            let semaphore = DispatchSemaphore(value: 0)
+            DispatchQueue.main.async {
+                appearance = darkMode() ? .dark : .light
+                semaphore.signal()
+            }
+            _ = semaphore.wait(timeout: .distantFuture)
+            return appearance
+        }
         #else
-        return UIView().traitCollection.userInterfaceStyle == .dark ? .dark : .light
+        return UIScreen.main.traitCollection.userInterfaceStyle == .dark ? .dark : .light
         #endif
     }
 }

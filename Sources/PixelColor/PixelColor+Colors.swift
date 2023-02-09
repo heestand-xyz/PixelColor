@@ -14,7 +14,9 @@ import SwiftUI
 
 extension PixelColor {
     
-    public static var primary: PixelColor = PixelColor.appearance == .dark ? .white : .black
+    public static var primary: PixelColor {
+        Self.appearance == .dark ? .white : .black
+    }
     
     public static var clear: PixelColor = .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
     public static var clearWhite: PixelColor = .init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)

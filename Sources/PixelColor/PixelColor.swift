@@ -11,7 +11,7 @@ import CoreGraphics
 /// - Channels: ``red-swift.type.property``,  ``green-swift.property``,  ``blue-swift.property`` and  ``alpha``.
 /// - Color conversions: ``init(hue:saturation:brightness:alpha:)``, ``hue`` and ``saturation``.
 /// - Hex conversion: ``init(hex:a:)`` and ``hex``.
-public struct PixelColor: Equatable, Hashable, CustomStringConvertible {
+public struct PixelColor: Equatable, CustomStringConvertible {
     
     public var red: CGFloat
     public var green: CGFloat
