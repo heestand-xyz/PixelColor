@@ -10,6 +10,10 @@ import CoreGraphics
 
 extension PixelColor {
     
+    public func opacity(_ opacity: CGFloat) -> PixelColor {
+        PixelColor(red: red, green: green, blue: blue, alpha: alpha * opacity)
+    }
+    
     public func withAlpha(of alpha: CGFloat) -> PixelColor {
         return PixelColor(red: red, green: green, blue: blue, alpha: alpha)
     }
