@@ -22,9 +22,9 @@ extension PixelColor {
     public static var clearWhite: PixelColor = .init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
 
     public static var white: PixelColor = .init(white: 1.0)
-    public static var gray: PixelColor = .init(white: 0.5)
     public static var black: PixelColor = .init(white: 0.0)
 
+    public static var rawGray: PixelColor = .init(white: 0.5)
     public static var rawRed: PixelColor = .init(red: 1.0, green: 0.0, blue: 0.0)
     public static var rawYellow: PixelColor = .init(red: 1.0, green: 1.0, blue: 0.0)
     public static var rawGreen: PixelColor = .init(red: 0.0, green: 1.0, blue: 0.0)
@@ -42,6 +42,14 @@ extension PixelColor {
 }
 
 extension PixelColor {
+    
+    public static var gray: PixelColor {
+        #if os(macOS)
+        return PixelColor(NSColor.systemGray)
+        #else
+        return PixelColor(UIColor.systemGray)
+        #endif
+    }
     
     public static var red: PixelColor{
         #if os(macOS)
