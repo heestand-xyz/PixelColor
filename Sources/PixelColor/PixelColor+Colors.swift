@@ -44,100 +44,50 @@ extension PixelColor {
 extension PixelColor {
     
     public static var gray: PixelColor {
-        #if os(macOS)
-        return PixelColor(NSColor.systemGray)
-        #else
-        return PixelColor(UIColor.systemGray)
-        #endif
+        DynamicColor.gray.pixelColor
     }
     
     public static var red: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemRed)
-        #else
-        return PixelColor(UIColor.systemRed)
-        #endif
+        DynamicColor.red.pixelColor
     }
     
     public static var green: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemGreen)
-        #else
-        return PixelColor(UIColor.systemGreen)
-        #endif
+        DynamicColor.green.pixelColor
     }
     
     public static var blue: PixelColor {
-        #if os(macOS)
-        return PixelColor(NSColor.systemBlue)
-        #else
-        return PixelColor(UIColor.systemBlue)
-        #endif
+        DynamicColor.blue.pixelColor
     }
     
-    @available(macOS 10.15, *)
     public static var indigo: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemIndigo)
-        #else
-        return PixelColor(UIColor.systemIndigo)
-        #endif
+        DynamicColor.indigo.pixelColor
     }
     
     public static var orange: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemOrange)
-        #else
-        return PixelColor(UIColor.systemOrange)
-        #endif
+        DynamicColor.orange.pixelColor
     }
     
     public static var pink: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemPink)
-        #else
-        return PixelColor(UIColor.systemPink)
-        #endif
+        DynamicColor.pink.pixelColor
     }
     
     public static var purple: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemPurple)
-        #else
-        return PixelColor(UIColor.systemPurple)
-        #endif
+        DynamicColor.purple.pixelColor
     }
     
     public static var teal: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemTeal)
-        #else
-        return PixelColor(UIColor.systemTeal)
-        #endif
+        DynamicColor.teal.pixelColor
     }
     
     public static var yellow: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemYellow)
-        #else
-        return PixelColor(UIColor.systemYellow)
-        #endif
+        DynamicColor.yellow.pixelColor
     }
     
     public static var brown: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemBrown)
-        #else
-        return PixelColor(UIColor.systemBrown)
-        #endif
+        DynamicColor.brown.pixelColor
     }
     
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     public static var mint: PixelColor{
-        #if os(macOS)
-        return PixelColor(NSColor.systemMint)
-        #else
-        return PixelColor(UIColor.systemMint)
-        #endif
+        DynamicColor.mint.pixelColor
     }
 }

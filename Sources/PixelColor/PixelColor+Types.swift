@@ -14,7 +14,6 @@ import SwiftUI
 
 extension PixelColor {
     
-    @available(macOS 10.15, *)
     public var color: Color {
         #if os(macOS)
         return Color(nsColor)
@@ -23,7 +22,6 @@ extension PixelColor {
         #endif
     }
     
-    @available(macOS 10.15, *)
     public var displayP3: Color {
         Color(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
     }

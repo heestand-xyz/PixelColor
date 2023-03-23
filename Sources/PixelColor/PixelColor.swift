@@ -18,15 +18,6 @@ public struct PixelColor: Equatable, CustomStringConvertible {
     public var blue: CGFloat
     public var alpha: CGFloat
     
-    @available(*, deprecated, renamed: "red")
-    public var r: CGFloat { red }
-    @available(*, deprecated, renamed: "green")
-    public var g: CGFloat { green }
-    @available(*, deprecated, renamed: "blue")
-    public var b: CGFloat { blue }
-    @available(*, deprecated, renamed: "alpha")
-    public var a: CGFloat { alpha }
-    
     public var description: String {
         func format(_ value: CGFloat) -> String {
             "\(round(value * 1_000) / 1_000)"
@@ -97,9 +88,6 @@ public struct PixelColor: Equatable, CustomStringConvertible {
     }
     #endif
     
-    @available(iOS 14.0, *)
-    @available(tvOS 14, *)
-    @available(macOS 11, *)
     public init(_ color: Color) {
         guard let cgColor: CGColor = color.cgColor else {
             guard let pixelColor = Self.decode(color: color) else {
@@ -142,12 +130,7 @@ public struct PixelColor: Equatable, CustomStringConvertible {
         alpha = ciColor.alpha
     }
     
-    @available(*, deprecated, renamed: "init(red:green:blue:alpha:)")
-    public init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1.0) {
-        self.init(red: r, green: g, blue: b, alpha: a)
-    }
-    
-    // MARK: - Hue Saturaton Brightness
+    // MARK: - Hue Saturation Brightness
        
     public init(hue: CGFloat, saturation: CGFloat = 1.0, brightness: CGFloat = 1.0, alpha: CGFloat = 1.0) {
         let color = PixelColor.rgb(h: hue, s: saturation, v: brightness)
