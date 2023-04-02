@@ -90,7 +90,11 @@ extension DynamicColor {
             #if os(macOS)
             return PixelColor(NSColor.systemMint)
             #else
-            return PixelColor(UIColor.systemMint)
+            if #available(iOS 15.0, *) {
+                return PixelColor(UIColor.systemMint)
+            } else {
+                return .gray
+            }
             #endif
         }
     }
