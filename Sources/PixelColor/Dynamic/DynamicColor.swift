@@ -4,9 +4,7 @@ public enum DynamicColor: String, Codable, Identifiable, CaseIterable {
     
     case primary
     
-    case white
     case gray
-    case black
     
     case red
     case orange

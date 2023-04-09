@@ -16,10 +16,6 @@ extension DynamicColor {
             case .light:
                 return .black
             }
-        case .white:
-            return .white
-        case .black:
-            return .black
         case .gray:
             #if os(macOS)
             return PixelColor(NSColor.systemGray)

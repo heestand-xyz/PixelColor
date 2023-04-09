@@ -7,6 +7,11 @@ public enum CodableColor: Codable, Equatable, Hashable {
 }
 
 extension CodableColor {
+    public static let black: CodableColor = .static(.black)
+    public static let white: CodableColor = .static(.white)
+}
+
+extension CodableColor {
     public init(color: Color) {
         self = CodableColor.decode(color: color) ?? .static(.gray)
     }
