@@ -79,7 +79,7 @@ extension PixelColor {
             h += 360.0
         }
         h /= 360.0
-        return (h: h, s: s, v: v)
+        return (h: h, s: s * v, v: v)
     }
     
     static func rgb(hsv: HSV) -> RGB {
