@@ -9,7 +9,7 @@ final class LetsTest: XCTestCase {
         var currentColor: DynamicColor?
         
         for dynamicColor in DynamicColor.allCases {
-            if [.primary, .white, .gray, .black, .brown].contains(dynamicColor) { continue }
+            if [.primary, .gray, .brown].contains(dynamicColor) { continue }
             let hue = dynamicColor.pixelColor.hue
             XCTAssertLessThan(currentHue, hue, "\(currentColor?.rawValue ?? "nil") < \(dynamicColor.rawValue)")
             currentHue = hue

@@ -18,7 +18,7 @@ extension PixelColor {
     public static var appearance: Appearance {
         #if os(macOS)
         func darkMode() -> Bool {
-            NSApp.effectiveAppearance.name == .darkAqua
+            NSApp?.effectiveAppearance.name == .darkAqua
         }
         if Thread.isMainThread {
             return darkMode() ? .dark : .light
