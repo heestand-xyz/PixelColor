@@ -22,7 +22,7 @@ public struct PixelColor: Equatable, CustomStringConvertible {
         func format(_ value: CGFloat) -> String {
             "\(round(value * 1_000) / 1_000)"
         }
-        return "PixelColor(red: \(format(red)), green: \(format(green)), blue: \(format(blue)), alpha: \(format(alpha))"
+        return "PixelColor(red: \(format(red)), green: \(format(green)), blue: \(format(blue)), alpha: \(format(alpha)))"
     }
 
     public var components: [CGFloat] {
@@ -147,8 +147,8 @@ public struct PixelColor: Equatable, CustomStringConvertible {
         return String(format:"%06x", hexInt).uppercased()
     }
     
-    /// Create a Pixel Color from a hex like orange: `#ff80000`
-    public init(hex: String, a: CGFloat = 1) {
+    /// Create a Pixel Color from a hex like orange: `#ff8000`
+    public init?(hex: String, a: CGFloat = 1) {
         if hex.lowercased() == "f" {
             red = 1.0
             green = 1.0
@@ -163,11 +163,7 @@ public struct PixelColor: Equatable, CustomStringConvertible {
             return
         }
         guard hex != "" else {
-            red = 0.0
-            green = 0.0
-            blue = 0.0
-            alpha = a
-            return
+            return nil
         }
         var hex = hex
         func sub(txt: String, range: CountableRange<Int>) -> String {
@@ -176,17 +172,21 @@ public struct PixelColor: Equatable, CustomStringConvertible {
             return String(txt[start..<end])
         }
         if sub(txt: hex, range: 0..<1) == "#" {
-            if hex.count == 4 {
-                hex = sub(txt: hex, range: 1..<4)
-            } else {
-                hex = sub(txt: hex, range: 1..<7)
-            }
+            hex = String(Array(hex).dropFirst())
         }
-        if hex.count == 3 {
+        if hex.count == 1 {
+            let v = sub(txt: hex, range: 0..<1)
+            hex = v + v + v + v + v + v
+        } else if hex.count == 3 {
             let r = sub(txt: hex, range: 0..<1)
             let g = sub(txt: hex, range: 1..<2)
             let b = sub(txt: hex, range: 2..<3)
             hex = r + r + g + g + b + b
+        } else if hex.count == 8 {
+            hex = sub(txt: hex, range: 0..<6)
+        }
+        if hex.count != 6 {
+            return nil
         }
         var hexInt: UInt64 = 0
         let scanner: Scanner = Scanner(string: hex)
