@@ -177,6 +177,10 @@ public struct PixelColor: Equatable, CustomStringConvertible {
         if hex.count == 1 {
             let v = sub(txt: hex, range: 0..<1)
             hex = v + v + v + v + v + v
+        } else if hex.count == 2 {
+            let a = sub(txt: hex, range: 0..<1)
+            let b = sub(txt: hex, range: 1..<2)
+            hex = a + b + a + b + a + b
         } else if hex.count == 3 {
             let r = sub(txt: hex, range: 0..<1)
             let g = sub(txt: hex, range: 1..<2)
