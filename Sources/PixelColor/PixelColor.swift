@@ -68,7 +68,7 @@ public struct PixelColor: Equatable, CustomStringConvertible {
         alpha = CGFloat(alpha255) / 255
     }
     
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(xrOS)
     public init(_ uiColor: UIColor) {
         let ciColor = CIColor(color: uiColor)
         red = ciColor.red
