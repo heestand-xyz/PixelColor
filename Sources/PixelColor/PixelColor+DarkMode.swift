@@ -32,7 +32,7 @@ extension PixelColor {
             _ = semaphore.wait(timeout: .distantFuture)
             return appearance
         }
-        #elseif os(xrOS)
+        #elseif os(visionOS)
         return .dark
         #else
         return UIScreen.main.traitCollection.userInterfaceStyle == .dark ? .dark : .light
