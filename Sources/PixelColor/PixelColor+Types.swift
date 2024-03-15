@@ -29,12 +29,20 @@ extension PixelColor {
     #if os(macOS)
     
     public var nsColor: NSColor {
+        NSColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    public var nsColorP3: NSColor {
         NSColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
     }
     
     #else
     
     public var uiColor: UIColor {
+        UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    public var uiColorP3: UIColor {
         UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
     }
     
