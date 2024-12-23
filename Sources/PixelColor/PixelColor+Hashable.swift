@@ -8,7 +8,6 @@ extension PixelColor: Hashable {
         hasher.combine(red)
         hasher.combine(green)
         hasher.combine(blue)
-        hasher.combine(alpha)
-        hasher.combine(Self.appearance)
+        hasher.combine(opacity)
     }
 }

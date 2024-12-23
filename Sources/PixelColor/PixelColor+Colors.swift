@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Anton Heestand on 2021-05-11.
 //
@@ -14,80 +14,169 @@ import SwiftUI
 
 extension PixelColor {
     
+    /// White in dark mode and black in light mode.
+    @MainActor
     public static var primary: PixelColor {
-        Self.appearance == .dark ? .white : .black
+        switch Self.appearance {
+        case .dark: return .white
+        case .light: return .black
+        }
     }
     
-    public static var clear: PixelColor = .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-    public static var clearWhite: PixelColor = .init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
-
-    public static var white: PixelColor = .init(white: 1.0)
-    public static var black: PixelColor = .init(white: 0.0)
-
-    public static var rawGray: PixelColor = .init(white: 0.5)
-    public static var rawRed: PixelColor = .init(red: 1.0, green: 0.0, blue: 0.0)
-    public static var rawYellow: PixelColor = .init(red: 1.0, green: 1.0, blue: 0.0)
-    public static var rawGreen: PixelColor = .init(red: 0.0, green: 1.0, blue: 0.0)
-    public static var rawCyan: PixelColor = .init(red: 0.0, green: 1.0, blue: 1.0)
-    public static var rawBlue: PixelColor = .init(red: 0.0, green: 0.0, blue: 1.0)
-    public static var rawMagenta: PixelColor = .init(red: 1.0, green: 0.0, blue: 1.0)
-    
-    public static func brightness(_ brightness: CGFloat, alpha: CGFloat = 1.0) -> PixelColor {
-        PixelColor(hue: 0.0, saturation: 0.0, brightness: brightness, alpha: alpha)
+    /// Black in dark mode and white in light mode.
+    @MainActor
+    public static var background: PixelColor {
+        switch Self.appearance {
+        case .dark: return .black
+        case .light: return .white
+        }
     }
     
-    public static func hue(_ hue: CGFloat, alpha: CGFloat = 1.0) -> PixelColor {
-        PixelColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: alpha)
+    /// Transparent color. `#000000FF`
+    public static let clear: PixelColor = .init(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.0)
+    /// Transparent "white" color. `#FFFFFFFF`
+    ///
+    /// Useful when blending from white to transparent in a gradient.
+    public static let clearWhite: PixelColor = .init(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.0)
+    
+    /// `#FFFFFF`
+    public static let white: PixelColor = .init(white: 1.0)
+    /// `#000000`
+    public static let black: PixelColor = .init(white: 0.0)
+    
+    /// `50%` white.
+    public static let rawGray: PixelColor = .init(white: 0.5)
+    /// `#FF0000`
+    public static let rawRed: PixelColor = .init(red: 1.0, green: 0.0, blue: 0.0)
+    /// `#FFFF00`
+    public static let rawYellow: PixelColor = .init(red: 1.0, green: 1.0, blue: 0.0)
+    /// `#00FF00`
+    public static let rawGreen: PixelColor = .init(red: 0.0, green: 1.0, blue: 0.0)
+    /// `#00FFFF`
+    public static let rawCyan: PixelColor = .init(red: 0.0, green: 1.0, blue: 1.0)
+    /// `#0000FF`
+    public static let rawBlue: PixelColor = .init(red: 0.0, green: 0.0, blue: 1.0)
+    /// `#FF00FF`
+    public static let rawMagenta: PixelColor = .init(red: 1.0, green: 0.0, blue: 1.0)
+    
+    @available(*, deprecated, renamed: "brightness(_:opacity:)")
+    public static func brightness(_ brightness: CGFloat, alpha: CGFloat) -> PixelColor {
+        self.brightness(brightness, opacity: alpha)
+    }
+    
+    public static func brightness(_ brightness: CGFloat, opacity: CGFloat = 1.0) -> PixelColor {
+        PixelColor(hue: 0.0, saturation: 0.0, brightness: brightness, opacity: opacity)
+    }
+    
+    @available(*, deprecated, renamed: "hue(_:opacity:)")
+    public static func hue(_ hue: CGFloat, alpha: CGFloat) -> PixelColor {
+        self.hue(hue, opacity: alpha)
+    }
+    
+    public static func hue(_ hue: CGFloat, opacity: CGFloat = 1.0) -> PixelColor {
+        PixelColor(hue: hue, saturation: 1.0, brightness: 1.0, opacity: opacity)
     }
 }
 
 extension PixelColor {
     
     public static var gray: PixelColor {
-        DynamicColor.gray.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemGray)
+#else
+        PixelColor(UIColor.systemGray)
+#endif
     }
     
     public static var red: PixelColor{
-        DynamicColor.red.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemRed)
+#else
+        PixelColor(UIColor.systemRed)
+#endif
     }
     
     public static var green: PixelColor{
-        DynamicColor.green.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemGreen)
+#else
+        PixelColor(UIColor.systemGreen)
+#endif
     }
     
     public static var blue: PixelColor {
-        DynamicColor.blue.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemBlue)
+#else
+        PixelColor(UIColor.systemBlue)
+#endif
     }
     
     public static var indigo: PixelColor{
-        DynamicColor.indigo.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemIndigo)
+#else
+        PixelColor(UIColor.systemIndigo)
+#endif
     }
     
     public static var orange: PixelColor{
-        DynamicColor.orange.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemOrange)
+#else
+        PixelColor(UIColor.systemOrange)
+#endif
     }
     
     public static var pink: PixelColor{
-        DynamicColor.pink.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemPink)
+#else
+        PixelColor(UIColor.systemPink)
+#endif
     }
     
     public static var purple: PixelColor{
-        DynamicColor.purple.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemPurple)
+#else
+        PixelColor(UIColor.systemPurple)
+#endif
     }
     
     public static var teal: PixelColor{
-        DynamicColor.teal.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemTeal)
+#else
+        PixelColor(UIColor.systemTeal)
+#endif
     }
     
     public static var yellow: PixelColor{
-        DynamicColor.yellow.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemYellow)
+#else
+        PixelColor(UIColor.systemYellow)
+#endif
     }
     
     public static var brown: PixelColor{
-        DynamicColor.brown.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemBrown)
+#else
+        PixelColor(UIColor.systemBrown)
+#endif
     }
     
     public static var mint: PixelColor{
-        DynamicColor.mint.pixelColor
+#if os(macOS)
+        PixelColor(NSColor.systemMint)
+#else
+        if #available(iOS 15.0, *) {
+            PixelColor(UIColor.systemMint)
+        } else {
+            .gray
+        }
+#endif
     }
 }

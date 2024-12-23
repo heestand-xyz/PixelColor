@@ -7,11 +7,21 @@
 
 import Foundation
 import CoreGraphics
+import SwiftUI
 
 extension PixelColor {
     
     typealias HSV = (h: CGFloat, s: CGFloat, v: CGFloat)
     typealias RGB = (r: CGFloat, g: CGFloat, b: CGFloat)
+    
+    public var hueAngle: Angle {
+        get {
+            .degrees(Double(hue) * 360)
+        }
+        set {
+            hue = newValue.degrees / 360
+        }
+    }
     
     public var hue: CGFloat {
         get { hsv().h }
@@ -19,7 +29,7 @@ extension PixelColor {
             self = PixelColor(hue: newValue,
                               saturation: saturation,
                               brightness: brightness,
-                              alpha: alpha)
+                              opacity: opacity)
         }
     }
     
@@ -29,7 +39,7 @@ extension PixelColor {
             self = PixelColor(hue: hue,
                               saturation: newValue,
                               brightness: brightness,
-                              alpha: alpha)
+                              opacity: opacity)
         }
     }
    
@@ -39,7 +49,7 @@ extension PixelColor {
             self = PixelColor(hue: hue,
                               saturation: saturation,
                               brightness: newValue,
-                              alpha: alpha)
+                              opacity: opacity)
         }
     }
     
