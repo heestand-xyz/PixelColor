@@ -14,6 +14,7 @@ extension PixelColor: Codable {
         case red
         case green
         case blue
+        case opacity
         case alpha
     }
     
@@ -22,7 +23,11 @@ extension PixelColor: Codable {
         red = try container.decode(CGFloat.self, forKey: .red)
         green = try container.decode(CGFloat.self, forKey: .green)
         blue = try container.decode(CGFloat.self, forKey: .blue)
-        alpha = try container.decode(CGFloat.self, forKey: .alpha)
+        if container.contains(.alpha) {
+            opacity = try container.decode(CGFloat.self, forKey: .alpha)
+        } else {
+            opacity = try container.decode(CGFloat.self, forKey: .opacity)
+        }
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -30,6 +35,6 @@ extension PixelColor: Codable {
         try container.encode(red, forKey: .red)
         try container.encode(green, forKey: .green)
         try container.encode(blue, forKey: .blue)
-        try container.encode(alpha, forKey: .alpha)
+        try container.encode(opacity, forKey: .opacity)
     }
 }

@@ -22,7 +22,7 @@ extension PixelColor {
         let green = (green > 0.03928) ? pow((green + 0.055) / 1.055, 2.4) : (green / 12.92)
         let blue = (blue > 0.03928) ? pow((blue + 0.055) / 1.055, 2.4) : (blue / 12.92)
       
-        return PixelColor(red: red, green: green, blue: blue, alpha: alpha)
+        return PixelColor(red: red, green: green, blue: blue, opacity: opacity)
     }
     
     func linearToSRGB() -> PixelColor {
@@ -33,6 +33,6 @@ extension PixelColor {
         let green = (green <= 0.00304) ? (12.92 * green) : (1.055 * pow(green, k) - 0.055)
         let blue = (blue <= 0.00304) ? (12.92 * blue) : (1.055 * pow(blue, k) - 0.055)
 
-        return PixelColor(red: red, green: green, blue: blue, alpha: alpha)
+        return PixelColor(red: red, green: green, blue: blue, opacity: opacity)
     }
 }

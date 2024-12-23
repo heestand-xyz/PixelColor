@@ -15,27 +15,21 @@ extension PixelColor {
         case dark
     }
     
+    @MainActor
     public static var appearance: Appearance {
-        #if os(macOS)
-        func darkMode() -> Bool {
-            NSApp?.effectiveAppearance.name == .darkAqua
-        }
-        if Thread.isMainThread {
-            return darkMode() ? .dark : .light
-        } else {
-            var appearance: Appearance!
-            let semaphore = DispatchSemaphore(value: 0)
-            DispatchQueue.main.async {
-                appearance = darkMode() ? .dark : .light
-                semaphore.signal()
-            }
-            _ = semaphore.wait(timeout: .distantFuture)
-            return appearance
-        }
-        #elseif os(visionOS)
+#if os(macOS)
+        return darkMode() ? .dark : .light
+#elseif os(visionOS)
         return .dark
-        #else
+#else
         return UIScreen.main.traitCollection.userInterfaceStyle == .dark ? .dark : .light
-        #endif
+#endif
     }
+    
+#if os(macOS)
+    @MainActor
+    private static func darkMode() -> Bool {
+        NSApp?.effectiveAppearance.name == .darkAqua
+    }
+#endif
 }

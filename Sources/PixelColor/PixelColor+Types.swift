@@ -23,34 +23,42 @@ extension PixelColor {
     }
     
     public var displayP3: Color {
-        Color(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+        Color(.displayP3, red: red, green: green, blue: blue, opacity: opacity)
     }
     
     #if os(macOS)
     
     public var nsColor: NSColor {
-        NSColor(red: red, green: green, blue: blue, alpha: alpha)
+        NSColor(red: red, green: green, blue: blue, alpha: opacity)
     }
     
     public var nsColorP3: NSColor {
-        NSColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+        NSColor(displayP3Red: red, green: green, blue: blue, alpha: opacity)
     }
     
     #else
     
     public var uiColor: UIColor {
-        UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        UIColor(red: red, green: green, blue: blue, alpha: opacity)
     }
     
     public var uiColorP3: UIColor {
-        UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+        UIColor(displayP3Red: red, green: green, blue: blue, alpha: opacity)
     }
     
     #endif
     
+    var colorSpace: CGColorSpace {
+        if saturation > 0.0 {
+            return CGColorSpace(name: CGColorSpace.sRGB)!
+        } else {
+            return CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!
+        }
+    }
+    
     public var ciColor: CIColor {
         if saturation > 0.0 {
-            return CIColor(red: red, green: green, blue: blue, alpha: alpha, colorSpace: colorSpace) ?? .clear
+            return CIColor(red: red, green: green, blue: blue, alpha: opacity, colorSpace: colorSpace) ?? .clear
         } else {
             return CIColor(cgColor: cgColor)
         }
