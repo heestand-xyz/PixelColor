@@ -172,7 +172,7 @@ extension PixelColor {
 #if os(macOS)
         PixelColor(NSColor.systemMint)
 #else
-        if #available(iOS 15.0, *) {
+        if #available(iOS 15.0, tvOS 15.0, *) {
             PixelColor(UIColor.systemMint)
         } else {
             .gray
