@@ -22,6 +22,14 @@ extension PixelColor {
         #endif
     }
     
+    public var colorP3: Color {
+        #if os(macOS)
+        return Color(nsColorP3)
+        #else
+        return Color(uiColorP3)
+        #endif
+    }
+    
     public var displayP3: Color {
         Color(.displayP3, red: red, green: green, blue: blue, opacity: opacity)
     }
