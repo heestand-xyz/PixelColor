@@ -182,7 +182,7 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
     }
     
     @available(*, deprecated, renamed: "init(hex:opacity:)")
-    public init?(hex: String, a: CGFloat = 1) {
+    public init?(hex: String, a: CGFloat) {
         self.init(hex: hex, opacity: a)
     }
     
