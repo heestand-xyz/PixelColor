@@ -18,6 +18,7 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
     public var blue: CGFloat
     public var opacity: CGFloat
 
+    /// Opacity
     public var alpha: CGFloat {
         get {
             opacity
