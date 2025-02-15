@@ -14,22 +14,18 @@ import SwiftUI
 
 extension PixelColor {
     
+    /// SwiftUI Color
     public var color: Color {
-        #if os(macOS)
-        return Color(nsColor)
-        #else
-        return Color(uiColor)
-        #endif
+        Color(red: red, green: green, blue: blue, opacity: opacity)
     }
     
+    /// SwiftUI Color
+    @available(*, deprecated, renamed: "displayP3")
     public var colorP3: Color {
-        #if os(macOS)
-        return Color(nsColorP3)
-        #else
-        return Color(uiColorP3)
-        #endif
+        displayP3
     }
     
+    /// SwiftUI Color
     public var displayP3: Color {
         Color(.displayP3, red: red, green: green, blue: blue, opacity: opacity)
     }

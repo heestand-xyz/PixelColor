@@ -112,27 +112,32 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
     }
     #endif
     
-    public init(_ color: Color) {
-        guard let cgColor: CGColor = color.cgColor else {
-            guard let pixelColor = Self.decode(color: color) else {
-                self = .clear
+    public init(_ color: Color, convertToColorSpace: CGColorSpace? = nil) {
+        if #available(iOS 17.0, macOS 14.0, visionOS 1.0, *) {
+            let cgColor: CGColor = color.resolve(in: .init()).cgColor
+            self.init(cgColor, convertToColorSpace: convertToColorSpace)
+        } else {
+            guard let cgColor: CGColor = color.cgColor else {
+                guard let pixelColor = Self.decode(color: color) else {
+                    self = .clear
+                    return
+                }
+                self = pixelColor
                 return
             }
-            self = pixelColor
-            return
+            self.init(cgColor, convertToColorSpace: convertToColorSpace)
         }
-        self.init(cgColor)
     }
     
-    public init(_ cgColor: CGColor) {
+    public init(_ cgColor: CGColor, convertToColorSpace: CGColorSpace? = nil) {
         
         var cgColor: CGColor = cgColor
         
-        let displayP3 = CGColorSpace(name: CGColorSpace.displayP3)!
-        let sRGB = CGColorSpace(name: CGColorSpace.sRGB)!
-        if cgColor.colorSpace == displayP3 {
-            if let convertedCGColor: CGColor = cgColor.converted(to: sRGB, intent: .defaultIntent, options: nil) {
-                cgColor = convertedCGColor
+        if let convertToColorSpace: CGColorSpace {
+            if cgColor.colorSpace != convertToColorSpace {
+                if let convertedCGColor: CGColor = cgColor.converted(to: convertToColorSpace, intent: .defaultIntent, options: nil) {
+                    cgColor = convertedCGColor
+                }
             }
         }
         
