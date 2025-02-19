@@ -113,7 +113,7 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
     #endif
     
     public init(_ color: Color, convertToColorSpace: CGColorSpace? = nil) {
-        if #available(iOS 17.0, macOS 14.0, visionOS 1.0, *) {
+        if #available(iOS 17.0, tvOS 17.0, macOS 14.0, visionOS 1.0, *) {
             let cgColor: CGColor = color.resolve(in: .init()).cgColor
             self.init(cgColor, convertToColorSpace: convertToColorSpace)
         } else {
