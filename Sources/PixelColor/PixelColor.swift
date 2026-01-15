@@ -50,7 +50,7 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
         PixelColor(red: brightness, green: brightness, blue: brightness, opacity: opacity)
     }
     
-    public var simd: SIMD4<Float> {
+    public var simd4: SIMD4<Float> {
         SIMD4<Float>(
             x: Float(red),
             y: Float(green),
@@ -169,11 +169,11 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
         opacity = ciColor.alpha
     }
     
-    public init(simd: SIMD4<Float>) {
-        red = CGFloat(simd.x)
-        green = CGFloat(simd.y)
-        blue = CGFloat(simd.z)
-        opacity = CGFloat(simd.w)
+    public init(simd4: SIMD4<Float>) {
+        red = CGFloat(simd4.x)
+        green = CGFloat(simd4.y)
+        blue = CGFloat(simd4.z)
+        opacity = CGFloat(simd4.w)
     }
     
     // MARK: - Hue Saturation Brightness
