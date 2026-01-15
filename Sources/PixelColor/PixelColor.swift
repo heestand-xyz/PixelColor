@@ -5,6 +5,7 @@ import UIKit
 #endif
 import SwiftUI
 import CoreGraphics
+import simd
 
 /// Pixel Color with `4` `CGFloat` channels.
 ///
@@ -47,6 +48,15 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
     
     public var monochrome: PixelColor {
         PixelColor(red: brightness, green: brightness, blue: brightness, opacity: opacity)
+    }
+    
+    public var simd: SIMD4<Float> {
+        SIMD4<Float>(
+            x: Float(red),
+            y: Float(green),
+            z: Float(blue),
+            w: Float(alpha)
+        )
     }
     
     // MARK: Life Cycle
@@ -157,6 +167,13 @@ public struct PixelColor: Equatable, CustomStringConvertible, Sendable {
         green = ciColor.green
         blue = ciColor.blue
         opacity = ciColor.alpha
+    }
+    
+    public init(simd: SIMD4<Float>) {
+        red = CGFloat(simd.x)
+        green = CGFloat(simd.y)
+        blue = CGFloat(simd.z)
+        opacity = CGFloat(simd.w)
     }
     
     // MARK: - Hue Saturation Brightness
